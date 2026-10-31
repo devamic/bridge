@@ -1,6 +1,8 @@
 export function onRequest(context) {
 	const url = new URL(context.request.url);
-	const path = url.searchParams.get("path");
+	const current = url.searchParams.get("current");
+	const dynamic = url.searchParams.get("dynamic");
 
-	return Response.redirect(`https://cbz.nekoweb.org/${path}`, 302);
+	const path = current ? `https://cbz.nekoweb.org/${current}` : (dynamic ? `https://dinytune.serv00.net/cbz/${dynamic}` : "https://cbz.nekoweb.org/");
+	return Response.redirect(path, 302);
 }
