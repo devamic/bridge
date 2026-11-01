@@ -13,7 +13,7 @@ export async function onRequest(context) {
 	const current = url.searchParams.get("current");
 	const dynamic = url.searchParams.get("dynamic");
 
-	const path = current ? `https://cbz.nekoweb.org/${current}` : (dynamic ? `https://dinytune.serv00.net/cbz/${dynamic}` : "https://cbz.nekoweb.org/");
+	const path = current ? (current.startsWith("http") ? current : `https://cbz.nekoweb.org/${current}`) : (dynamic ? `https://dinytune.serv00.net/cbz/${dynamic}` : "https://cbz.nekoweb.org/");
 
 	// Fetch
 	if (context.request.headers.get("Sec-Fetch-Mode") === "cors") {
